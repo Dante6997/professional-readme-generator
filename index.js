@@ -124,14 +124,27 @@ const questions = [
             }
         }
     },
-
 ];
 
 // TODO: Create a function to write README file
-function writeToFile(fileName, data) {}
+function writeToFile(fileName, data) {
+    fs.writeFile(fileName, data, function (err) {
+        if (err) {
+            console.log(err);
+        } else {
+            console.log('Successfully created README file');
+        }
+    });
+}
 
 // TODO: Create a function to initialize app
-function init() {}
+function init() {
+    inquirer.prompt(questions)
+       .then(userInput => {
+            console.log('userInput')
+            writeToFile('./dist/README.md', generateMarkdown(userInput));
+        });
+}
 
 // Function call to initialize app
 init();
